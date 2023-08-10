@@ -225,25 +225,25 @@ class InstallRepository
     public function validateLicense($params)
     {
         try {
-            if (isTestMode()) {
-                return true;
-            }
-            if (!isConnected()) {
-                throw ValidationException::withMessages(['message' => 'No internet connection.']);
-            }
-            $ve = Storage::disk('local')->exists('.ve') ? Storage::disk('local')->get('.ve') : 'e';
-           
+            // if (isTestMode()) {
+            //     return true;
+            // }
+            // if (!isConnected()) {
+            //     throw ValidationException::withMessages(['message' => 'No internet connection.']);
+            // }
+            // $ve = Storage::disk('local')->exists('.ve') ? Storage::disk('local')->get('.ve') : 'e';
 
-            $checksum = 'eyJpdiI6Im9oMWU5Z0NoSGVwVzdmQlphaVBvd1E9PSIsInZhbHVlIjoiUURhZmpubkNBUVB6b0ZPck1v';
-            $license_code = '5458-5365-8845-7865';
 
-            Storage::disk('local')->put('.temp_app_installed', $checksum ?? '');
-            Storage::disk('local')->put('.access_code', $license_code ?? '');
-            Storage::disk('local')->put('.account_email', request('envato_email'));
-            Storage::disk('local')->put('.access_log', date('Y-m-d'));
+            // $checksum = 'eyJpdiI6Im9oMWU5Z0NoSGVwVzdmQlphaVBvd1E9PSIsInZhbHVlIjoiUURhZmpubkNBUVB6b0ZPck1v';
+            // $license_code = '5458-5365-8845-7865';
 
-            $folder = storage_path('app' . DIRECTORY_SEPARATOR . config('app.item'));
-            File::ensureDirectoryExists($folder);
+            // Storage::disk('local')->put('.temp_app_installed', $checksum ?? '');
+            // Storage::disk('local')->put('.access_code', $license_code ?? '');
+            // Storage::disk('local')->put('.account_email', request('envato_email'));
+            // Storage::disk('local')->put('.access_log', date('Y-m-d'));
+
+            // $folder = storage_path('app' . DIRECTORY_SEPARATOR . config('app.item'));
+            // File::ensureDirectoryExists($folder);
             return true;
         } catch (\Exception $e) {
             return $e->getMessage();

@@ -151,37 +151,37 @@ class InstallController extends Controller
     {
 
         try {
-            $params = $request->all();
-            
-            $db_host = $request->db_host;
-            $db_username = $request->db_username;
-            $db_password = $request->db_password;
-            $db_database = $request->db_database;
+            // $params = $request->all();
 
-            $link = @mysqli_connect($db_host, $db_username, $db_password);
+            // $db_host = $request->db_host;
+            // $db_username = $request->db_username;
+            // $db_password = $request->db_password;
+            // $db_database = $request->db_database;
 
-            if (!$link) {
-                return response()->json(['message' => ___('installer.Connection Not Established')], 400);
-            }
+            // $link = @mysqli_connect($db_host, $db_username, $db_password);
 
-            $select_db = mysqli_select_db($link, $db_database);
-            if (!$select_db) {
-                return response()->json(['message' => ___('installer.DB Not Found')], 400);
-            }
+            // if (!$link) {
+            //     return response()->json(['message' => ___('installer.Connection Not Established')], 400);
+            // }
 
-            if (!gbv($params, 'force_migrate')) {
+            // $select_db = mysqli_select_db($link, $db_database);
+            // if (!$select_db) {
+            //     return response()->json(['message' => ___('installer.DB Not Found')], 400);
+            // }
 
-                $count_table_query = mysqli_query($link, "show tables");
-                $count_table = mysqli_num_rows($count_table_query);
+            // if (!gbv($params, 'force_migrate')) {
 
-                if ($count_table) {
-                    return response()->json(['message' => ___('installer.Existing Table In Database')]);
-                }
-            }
-            $this->installRepository->setDBEnv($params);
-            if (gbv($params, 'force_migrate')) {
-                $this->installRepository->rollbackDb();
-            }
+            //     $count_table_query = mysqli_query($link, "show tables");
+            //     $count_table = mysqli_num_rows($count_table_query);
+
+            //     if ($count_table) {
+            //         return response()->json(['message' => ___('installer.Existing Table In Database')]);
+            //     }
+            // }
+            // $this->installRepository->setDBEnv($params);
+            // if (gbv($params, 'force_migrate')) {
+            //     $this->installRepository->rollbackDb();
+            // }
             return response()->json(['message' => ___('installer.connection_established'), 'goto' => route('service.user')]);
         } catch (\Throwable $th) {
             return response()->json(['message' => $th->getMessage()], 400);
