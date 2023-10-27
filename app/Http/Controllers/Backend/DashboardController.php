@@ -25,53 +25,55 @@ use Modules\Certificate\Interfaces\CertificateGenerateInterface;
 
 class DashboardController extends Controller
 {
-    use ApiReturnFormatTrait;
+    // use ApiReturnFormatTrait;
 
-    private $user;
-    private $student;
-    private $instructor;
-    private $enroll;
-    private $course;
-    private $featuredCourse;
-    private $certificateGenerate;
-    private $income;
-    private $expense;
-    private $payout;
-    private $orderInterface;
+    // private $user;
+    // private $student;
+    // private $instructor;
+    // private $enroll;
+    // private $course;
+    // private $featuredCourse;
+    // private $certificateGenerate;
+    // private $income;
+    // private $expense;
+    // private $payout;
+    // private $orderInterface;
 
-    public function __construct(
-        UserInterface $userInterface,
-        StudentInterface $student,
-        InstructorInterface $instructor,
-        EnrollInterface $enroll,
-        CourseInterface $course,
-        FeaturedCourseInterface $featuredCourse,
-        CertificateGenerateInterface $certificateGenerate,
-        IncomeInterface $income,
-        ExpenseInterface $expense,
-        PayoutInterface $payout,
-        OrderInterface $orderInterface
-    ) {
+    // public function __construct(
+    //     UserInterface $userInterface,
+    //     StudentInterface $student,
+    //     InstructorInterface $instructor,
+    //     EnrollInterface $enroll,
+    //     CourseInterface $course,
+    //     FeaturedCourseInterface $featuredCourse,
+    //     CertificateGenerateInterface $certificateGenerate,
+    //     IncomeInterface $income,
+    //     ExpenseInterface $expense,
+    //     PayoutInterface $payout,
+    //     OrderInterface $orderInterface
+    // ) {
 
-        if (!Schema::hasTable('settings') && !Schema::hasTable('users')) {
-            abort(400);
-        }
-        $this->user = $userInterface;
-        $this->student = $student;
-        $this->instructor = $instructor;
-        $this->enroll = $enroll;
-        $this->course = $course;
-        $this->featuredCourse = $featuredCourse;
-        $this->certificateGenerate = $certificateGenerate;
-        $this->income = $income;
-        $this->expense = $expense;
-        $this->payout = $payout;
-        $this->orderInterface = $orderInterface;
+    //     if (!Schema::hasTable('settings') && !Schema::hasTable('users')) {
+    //         abort(400);
+    //     }
+    //     $this->user = $userInterface;
+    //     $this->student = $student;
+    //     $this->instructor = $instructor;
+    //     $this->enroll = $enroll;
+    //     $this->course = $course;
+    //     $this->featuredCourse = $featuredCourse;
+    //     $this->certificateGenerate = $certificateGenerate;
+    //     $this->income = $income;
+    //     $this->expense = $expense;
+    //     $this->payout = $payout;
+    //     $this->orderInterface = $orderInterface;
 
-    }
+    // }
 
     public function index(Request $request)
     {
+        $data = [];
+        return view('backend.dashboard',compact('data'));
         try {
 
             $data['student'] = $this->student->model()->count();
@@ -90,7 +92,7 @@ class DashboardController extends Controller
             $data['top_courses'] = $courses->clone()->orderBy('total_sales', 'desc')->limit(5)->get();
             $data['top_students'] = $this->student->model()->orderBy('points', 'desc')->limit(5)->get();
             $data['top_instructors'] = $this->instructor->model()->withCount('courses')->orderBy('courses_count', 'desc')->limit(5)->get();
-            return view('backend.dashboard', compact('data'));
+            return view('backend.dashboard');
 
         } catch (\Throwable $th) {
             return redirect('/')->with('danger', ___('alert.something_went_wrong_please_try_again'));

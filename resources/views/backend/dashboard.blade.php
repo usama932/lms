@@ -122,7 +122,7 @@
                                 <h4>{{ ___('dashboard.Top_courses') }}</h4>
                             </div>
 
-                            <div class="table-responsive ">
+                            {{-- <div class="table-responsive ">
                                 <table class="table table-bordered">
                                     <thead class="thead">
                                         <tr>
@@ -162,7 +162,7 @@
                                         @endforelse
                                     </tbody>
                                 </table>
-                            </div>
+                            </div> --}}
                             <!--  table end -->
                         </div>
                     </div>
@@ -308,7 +308,7 @@
             {{-- Table --}}
 
 
-            <!--  top five student start -->
+            {{-- <!--  top five student start -->
             <div class="col-lg-6 table-content table-basic">
                 <div class="card h-calc">
                     <div class="card-body">
@@ -417,7 +417,7 @@
                         <!--  table end -->
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!--  top five instructor end -->
 
 

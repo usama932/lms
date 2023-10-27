@@ -48,16 +48,7 @@
                     </li>
                 @endif
 
-                {{-- start Ai  --}}
-                @if (hasPermission('ai_support'))
-                    <li class="sidebar-menu-item {{ set_menu(['admin.ai-support.index']) }}">
-                        <a href="{{ route('admin.ai-support.index') }}" class="parent-item-content">
-                            <i class="las la-sms"></i>
-                            <span class="on-half-expanded">{{ ___('backend_sidebar.AI_Support') }}</span>
-                        </a>
-                    </li>
-                @endif
-                {{-- end Ai  --}}
+               
 
                 {{-- start Course  --}}
                 @if (hasPermission('course_read') || hasPermission('course_category_read'))

@@ -20,57 +20,43 @@ class HomeController extends Controller
 {
     use ApiReturnFormatTrait;
 
-    protected $slider;
-    protected $blog;
-    protected $courseCategory;
-    protected $brand;
-    protected $homeSection;
-    protected $featuredCourse;
-    protected $testimonial;
-    protected $certificateRepository;
-    protected $course;
+    // protected $slider;
+    // protected $blog;
+    // protected $courseCategory;
+    // protected $brand;
+    // protected $homeSection;
+    // protected $featuredCourse;
+    // protected $testimonial;
+    // protected $certificateRepository;
+    // protected $course;
 
-    // constructor injection
-    public function __construct(
-        SliderInterface $slider,
-        BlogInterface $blog,
-        CourseCategoryInterface $courseCategory,
-        BrandInterface $brand,
-        HomeSectionInterface $homeSectionInterface,
-        FeaturedCourseInterface $featuredCourseInterface,
-        TestimonialInterface $testimonialInterface,
-        CertificateGenerateInterface $certificateGenerateInterface,
-        CourseInterface $courseInterface
-    ) {
-        $this->slider = $slider;
-        $this->blog = $blog;
-        $this->courseCategory = $courseCategory;
-        $this->brand = $brand;
-        $this->homeSection = $homeSectionInterface;
-        $this->featuredCourse = $featuredCourseInterface;
-        $this->testimonial = $testimonialInterface;
-        $this->course = $courseInterface;
-        $this->certificateRepository = $certificateGenerateInterface;
-    }
+    // // constructor injection
+    // public function __construct(
+    //     SliderInterface $slider,
+    //     BlogInterface $blog,
+    //     CourseCategoryInterface $courseCategory,
+    //     BrandInterface $brand,
+    //     HomeSectionInterface $homeSectionInterface,
+    //     FeaturedCourseInterface $featuredCourseInterface,
+    //     TestimonialInterface $testimonialInterface,
+    //     CertificateGenerateInterface $certificateGenerateInterface,
+    //     CourseInterface $courseInterface
+    // ) {
+    //     $this->slider = $slider;
+    //     $this->blog = $blog;
+    //     $this->courseCategory = $courseCategory;
+    //     $this->brand = $brand;
+    //     $this->homeSection = $homeSectionInterface;
+    //     $this->featuredCourse = $featuredCourseInterface;
+    //     $this->testimonial = $testimonialInterface;
+    //     $this->course = $courseInterface;
+    //     $this->certificateRepository = $certificateGenerateInterface;
+    // }
 
     public function index(Request $request)
     {
-
-        try {
-            $data['title'] = ___('frontend.Home'); // title
-
-            if (Cache::has('sections')) {
-                $sections = Cache::get('sections');
-            } else {
-                $sections = $this->homeSection->model()->where('type', 'web')->orderBy('order', 'ASC')->get(); // get all home section
-                Cache::put('sections', $sections);
-            }
-            $data['section'] = $sections;
-
-            return view('frontend.home', compact('data'));
-        } catch (\Throwable $th) {
-            return redirect()->route('home')->with('danger', ___('alert.something_went_wrong_please_try_again'));
-        }
+        return view('frontend.home');
+        
     }
     public function forum(Request $request)
     {

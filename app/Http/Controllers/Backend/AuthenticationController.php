@@ -32,6 +32,7 @@ class AuthenticationController extends Controller
 
     public function loginPage()
     {
+        
         $data['title'] = "Login";
         return view('backend.auth.login', compact('data'));
     }
